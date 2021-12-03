@@ -33,9 +33,8 @@ fun main() {
     fun part2(input: List<String>): Int {
         val length = input[0].length
 
-        var o2 = input.toList()
-        var co2 = input.toList()
-
+        var o2 = input
+        var co2 = input
 
         for(i in 0 until length){
             if(o2.size > 1){

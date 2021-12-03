@@ -1,7 +1,7 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        val length = input.get(0).length
-        var counts = IntArray(length){ 0 }
+        val length = input[0].length
+        val counts = IntArray(length){ 0 }
 
         input.forEach {
             for(i in 0 until length){
@@ -14,10 +14,8 @@ fun main() {
             }
         }
 
-        var gammaStr = arrayOfNulls<Char>(length)
-        var epsilonStr = arrayOfNulls<Char>(length)
-        gammaStr.fill('0')
-        epsilonStr.fill('1')
+        val gammaStr = CharArray(length){'0'}
+        val epsilonStr = CharArray(length){'1'}
 
         for (i in 0 until length){
             if(counts[i] > 0){

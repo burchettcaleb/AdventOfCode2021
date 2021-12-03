@@ -27,25 +27,24 @@ fun main() {
         val gamma = Integer.parseInt(gammaStr.joinToString(""), 2)
         val epsilon = Integer.parseInt(epsilonStr.joinToString(""), 2)
 
-
         return gamma * epsilon
     }
 
     fun part2(input: List<String>): Int {
         val length = input[0].length
 
-        var o2 = input.toMutableList()
-        var co2 = input.toMutableList()
+        var o2 = input.toList()
+        var co2 = input.toList()
+
 
         for(i in 0 until length){
-            val o2MostCommon = if (o2.count { it[i] == '1'} >= o2.size.toDouble() / 2.0) '1' else '0'
-            val co2MostCommon = if (co2.count { it[i] == '1'} >= co2.size.toDouble() / 2.0) '1' else '0'
-
             if(o2.size > 1){
-                o2 = o2.filter { it[i] == o2MostCommon }.toMutableList()
+                val (ones, zeroes) = o2.partition { it[i] == '1' }
+                o2 = if(ones.size >= zeroes.size) ones else zeroes
             }
             if(co2.size > 1){
-                co2 = co2.filter { it[i] != co2MostCommon }.toMutableList()
+                val (ones, zeroes) = co2.partition { it[i] == '1' }
+               co2 = if(ones.size >= zeroes.size) zeroes else ones
             }
         }
 

@@ -4,7 +4,6 @@ fun main() {
     fun part1(input: List<String>): Int {
         var fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
 
-
         for(i in 1..80){
 
             var newFishCount = 0
@@ -22,29 +21,6 @@ fun main() {
         }
         return fishes.size
     }
-
-    // Ignore this attempt at being clever
-//    fun fishFromStartFish(input: Int): Int {
-//        var fishes =  listOf<Int>(input).toMutableList()
-//
-//        for(i in 1..256){
-//
-//            var newFishCount = 0
-//            for(i in 0 until fishes.size){
-//                if(fishes[i] > 0){
-//                    fishes[i]--
-//                }else if(fishes[i] == 0){
-//                    fishes[i] = 6
-//                    newFishCount++
-//                }else{
-//                    println("something bad happened")
-//                }
-//            }
-//            fishes.addAll(List(newFishCount) { 8 })
-//        }
-//        println(fishes.size)
-//        return fishes.size
-//    }
 
     fun part2(input: List<String>): Long {
         var fishes = input[0].split(",").map { it.toInt()}.toMutableList()

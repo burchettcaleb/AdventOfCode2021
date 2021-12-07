@@ -4,8 +4,7 @@ fun main() {
     fun part1(input: List<String>): Int {
         val fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
 
-        for(j in 1..80){
-
+        repeat(80){
             var newFishCount = 0
             for(i in 0 until fishes.size){
                 if(fishes[i] > 0){

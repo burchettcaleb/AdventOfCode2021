@@ -1,3 +1,5 @@
+import java.util.*
+
 fun main() {
     fun part1(input: List<String>): Int {
         val fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
@@ -22,30 +24,13 @@ fun main() {
 
     fun part2(input: List<String>): Long {
         val fishes = input[0].split(",").map { it.toInt()}.toMutableList()
+        val numbers = List(9){it}.map { num -> fishes.count{it == num}.toLong() }.toMutableList()
 
-        var zeroes = fishes.count { it == 0}.toLong()
-        var ones = fishes.count { it == 1}.toLong()
-        var twos = fishes.count { it == 2}.toLong()
-        var threes = fishes.count { it == 3}.toLong()
-        var fours = fishes.count { it == 4}.toLong()
-        var fives = fishes.count { it == 5}.toLong()
-        var sixes = fishes.count { it == 6}.toLong()
-        var sevens = fishes.count { it == 7}.toLong()
-        var eights = fishes.count { it == 8}.toLong()
-
-        for(i in 1..256){
-            val newFish = zeroes
-            zeroes = ones
-            ones = twos
-            twos = threes
-            threes = fours
-            fours = fives
-            fives = sixes
-            sixes = newFish + sevens
-            sevens = eights
-            eights = newFish
+        repeat(256){
+            Collections.rotate(numbers, -1)
+            numbers[6] += numbers[8]
         }
-        return zeroes + ones + twos + threes + fours + fives + sixes + sevens + eights
+        return numbers.fold(0L){sum, num -> sum + num}
     }
 
     val testInput = readInput("Day06_test")

@@ -5,7 +5,7 @@ fun main() {
 
     fun gcd(num1: Int, num2: Int): Int {
         var gcd = 1
-        var i = 1;
+        var i = 1
         val n1 = if(num1 < 0) -num1 else num1
         val n2 = if(num2 < 0) -num2 else num2
         while(i <= min(n1, n2)){
@@ -18,7 +18,7 @@ fun main() {
     }
 
     fun part1(input: List<String>): Int {
-        var map = mutableMapOf<String, Int>()
+        val map = mutableMapOf<String, Int>()
 
         // For each vector
         input.forEach { line ->
@@ -63,7 +63,7 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        var map = mutableMapOf<String, Int>()
+        val map = mutableMapOf<String, Int>()
         input.forEach { line ->
             val points = line.split("\\D+".toRegex()).map { it.toInt() }
             var x1 = points[0]
@@ -102,13 +102,13 @@ fun main() {
                 }
 
             }else {
-                var changeX = x2 - x1
-                var changeY = y2 - y1
+                val changeX = x2 - x1
+                val changeY = y2 - y1
                 val gcd = gcd(changeX, changeY)
                 val slopeX = changeX / gcd
                 val slopeY = changeY / gcd
 
-                var x = x1;
+                var x = x1
                 var y = y1
                 while (min(x1, x2) <= x && x <= max(x1, x2)) {
                     val key = "$x,$y"

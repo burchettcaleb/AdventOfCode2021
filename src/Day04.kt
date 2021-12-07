@@ -1,5 +1,4 @@
 fun main() {
-
     data class BingoValue(
         var squareValue: Int,
         var marked: Boolean
@@ -7,9 +6,9 @@ fun main() {
 
     fun getBoards(input : List<String>): MutableList<Array<Array<BingoValue>>> {
         val boards = mutableListOf<Array<Array<BingoValue>>>()
-        input.windowed(6, 6).forEachIndexed { index , strings ->
+        input.windowed(6, 6).forEachIndexed { _, strings ->
             // Parse each board and add to boards
-            var board = Array(5) { Array(5) { BingoValue(0,false) } }
+            val board = Array(5) { Array(5) { BingoValue(0,false) } }
 
             // Ignore index 0 as it is always the blank line between boards
             strings.drop(1).forEachIndexed { row, string ->
@@ -34,7 +33,7 @@ fun main() {
             var winningRow = true
             for(column: Int in 0..4){
                 if(!input[row][column].marked){
-                    winningRow = false;
+                    winningRow = false
                 }
             }
             if (winningRow){
@@ -47,14 +46,13 @@ fun main() {
             var winningColumn = true
             for(row: Int in 0..4){
                 if(!input[row][column].marked){
-                    winningColumn = false;
+                    winningColumn = false
                 }
             }
             if (winningColumn){
                 winner = true
             }
         }
-
         return winner
     }
 
@@ -77,7 +75,7 @@ fun main() {
                 }
             }
         }
-        return sum;
+        return sum
     }
 
 
@@ -100,12 +98,12 @@ fun main() {
 
     fun part2(input: List<String>): Int {
         val numbers = input[0].split(",").map { it.toInt() }
-        var boards = getBoards(input.drop(1))
+        val boards = getBoards(input.drop(1))
         val alterableBoards: ArrayList<Array<Array<BingoValue>>> = ArrayList(boards)
         var winningScore = 0
 
         numbers.forEach { num ->
-            boards.forEachIndexed { index, board ->
+            boards.forEachIndexed { _, board ->
                 mark(board, num)
                 if(alterableBoards.size > 0){
                     if(hasWon(board)){

@@ -1,8 +1,8 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        var fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
+        val fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
 
-        for(i in 1..80){
+        for(j in 1..80){
 
             var newFishCount = 0
             for(i in 0 until fishes.size){
@@ -21,7 +21,7 @@ fun main() {
     }
 
     fun part2(input: List<String>): Long {
-        var fishes = input[0].split(",").map { it.toInt()}.toMutableList()
+        val fishes = input[0].split(",").map { it.toInt()}.toMutableList()
 
         var zeroes = fishes.count { it == 0}.toLong()
         var ones = fishes.count { it == 1}.toLong()
@@ -32,8 +32,6 @@ fun main() {
         var sixes = fishes.count { it == 6}.toLong()
         var sevens = fishes.count { it == 7}.toLong()
         var eights = fishes.count { it == 8}.toLong()
-
-
 
         for(i in 1..256){
             val newFish = zeroes
@@ -47,7 +45,6 @@ fun main() {
             sevens = eights
             eights = newFish
         }
-
         return zeroes + ones + twos + threes + fours + fives + sixes + sevens + eights
     }
 

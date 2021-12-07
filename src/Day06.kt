@@ -1,6 +1,7 @@
 import java.util.*
 
 fun main() {
+    // This is definitely the bad way to do this but I did it better in part2
     fun part1(input: List<String>): Int {
         val fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
 

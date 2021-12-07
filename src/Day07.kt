@@ -27,9 +27,7 @@ fun main() {
             var fuel = 0;
             locations.forEach { crab ->
                 val steps = if(i - crab > 0) i - crab else crab - i
-                for(j in 1..steps ){
-                    fuel += j
-                }
+                fuel += (steps * (steps + 1)) / 2
             }
             if(leastFuel > fuel){
                 leastFuel = fuel

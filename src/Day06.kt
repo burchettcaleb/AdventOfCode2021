@@ -1,5 +1,3 @@
-import kotlin.math.pow
-
 fun main() {
     fun part1(input: List<String>): Int {
         var fishes =  input[0].split(",").map { it.toInt() }.toMutableList()

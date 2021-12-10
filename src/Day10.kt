@@ -10,8 +10,8 @@ fun main() {
         input.forEach { line ->
             stack.clear()
 
-            // This lets us break out of the forEach below, could've just
-            // used a normal loop, but I wanted to try this out
+            // This line@ lets us break out of the forEach below, could've just
+            // used a normal loop with break, but I wanted to try this out
             run line@ {
                 line.forEach { c ->
                     if(c in open){
@@ -25,8 +25,8 @@ fun main() {
                             }
                         }else{
                             sum += score[c]!!
-                            // This never happens but can't be too safe
-                            println("Closing brace with no open")
+                            // This turns out to never happen
+                            println("Closing symbol with no open")
                             return@line
                         }
                     }
@@ -42,31 +42,20 @@ fun main() {
         val open = setOf('(', '[', '{', '<')
         val score = mapOf(')' to 1, ']' to 2, '}' to 3, '>' to 4)
         val scores = mutableListOf<Long>()
+
         input.forEach { line ->
             stack.clear()
-            // This lets us break out of the forEach below, could've just
-            // used a normal loop, but I wanted to try this out
             run line@ {
                 line.forEach { c ->
                     if(c in open){
                         stack.push(c)
                     }else{
-                        //Check closing brace matches
-                        if(stack.isNotEmpty()){
-                            if(openToClose[stack.pop()] != c){
-                                //Bad line
-                                return@line
-                            }
-                        }else{
-                            // This never happens but can't be too safe
-                            println("Closing brace with no open")
-                            return@line
-                        }
+                        if(openToClose[stack.pop()] != c) return@line
                     }
                 }
                 var lineScore = 0L
                 while(stack.isNotEmpty()){
-                    lineScore = (lineScore * 5) + score[openToClose[stack.pop()]]!!
+                    lineScore = lineScore * 5 + score[openToClose[stack.pop()]]!!
                 }
                 scores.add(lineScore)
             }

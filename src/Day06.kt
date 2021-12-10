@@ -1,7 +1,7 @@
 import java.util.*
 
 fun main() {
-    // This is definitely the bad way to do this but I did it better in part2
+    // This is definitely the bad way to do this, but I did it better in part2
     fun part1(input: List<String>): Int {
         val fishes =  input[0].split(",").map { it.toInt() }.toMutableList()
 
@@ -33,6 +33,29 @@ fun main() {
         return numbers.fold(0L){sum, num -> sum + num}
     }
 
+    // This is a really cool recursive solution I saw on reddit, but needs to be cached to be performant
+    fun numDescendants(day: Int, end: Int, cache: MutableMap<Int, Long>): Long {
+        if(cache.containsKey(day)) return cache[day]!!
+        if(end - day <= 8) {
+            cache[day] = 1
+            return 1
+        }
+        var sum = 1L
+        for(i in day + 9..end step 7){
+            sum += numDescendants(i, end, cache)
+        }
+        cache[day] = sum
+        return sum
+    }
+
+    fun part2ByRecursion(input: List<String>): Long {
+        val fishes = input[0].split(",").map { it.toInt()}
+        val cache = mutableMapOf<Int, Long>()
+        return fishes.map { numDescendants(it - 8, 256, cache) }.fold(0L){sum, num -> sum + num}
+    }
+
+
+
     val testInput = readInput("Day06_test")
     check(part1(testInput) == 5934)
     check(part2(testInput) == 26_984_457_539)
@@ -41,4 +64,5 @@ fun main() {
     val input = readInput("Day06")
     println(part1(input))
     println(part2(input))
+    println(part2ByRecursion(input))
 }

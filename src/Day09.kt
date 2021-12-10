@@ -22,21 +22,22 @@ fun main() {
         val points = mutableSetOf<String>()
         points.add("$x,$y")
 
+        val current = input[y][x].toString().toInt()
         val above = if(y + 1 < input.size ) input[y + 1][x].toString().toInt() else -1
         val below = if(y - 1 >= 0 ) input[y - 1][x].toString().toInt() else -1
         val left = if(x - 1 >= 0 ) input[y][x - 1].toString().toInt() else -1
         val right = if(x + 1 < input[0].length ) input[y][x + 1].toString().toInt() else -1
 
-        if(input[y][x].toString().toInt() < above && above < 9){
+        if(current < above && above < 9){
             points.addAll(basinSize(input, x, y + 1))
         }
-        if(input[y][x].toString().toInt() < below && below < 9){
+        if(current < below && below < 9){
             points.addAll(basinSize(input, x, y - 1))
         }
-        if(input[y][x].toString().toInt() < left && left < 9){
+        if(current < left && left < 9){
             points.addAll(basinSize(input, x - 1, y))
         }
-        if(input[y][x].toString().toInt() < right && right < 9){
+        if(current < right && right < 9){
             points.addAll(basinSize(input, x + 1, y))
         }
         return points

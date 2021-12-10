@@ -33,7 +33,8 @@ fun main() {
         return numbers.fold(0L){sum, num -> sum + num}
     }
 
-    // This is a really cool recursive solution I saw on reddit, but needs to be cached to be performant
+    // This is a really cool recursive solution I saw on reddit. Was originally in python,
+    // so I converted it to Kotlin. Just using a map for caching here for simplicity.
     fun numDescendants(day: Int, end: Int, cache: MutableMap<Int, Long>): Long {
         if(cache.containsKey(day)) return cache[day]!!
         if(end - day <= 8) {
@@ -54,12 +55,9 @@ fun main() {
         return fishes.map { numDescendants(it - 8, 256, cache) }.fold(0L){sum, num -> sum + num}
     }
 
-
-
     val testInput = readInput("Day06_test")
     check(part1(testInput) == 5934)
     check(part2(testInput) == 26_984_457_539)
-
 
     val input = readInput("Day06")
     println(part1(input))

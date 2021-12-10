@@ -38,16 +38,25 @@ fun main() {
 
     fun part2(input: List<String>): Long {
         val stack = ArrayDeque<Char>()
-        val openToClose = mapOf('(' to ')', '[' to ']', '{' to '}', '<' to '>')
-        val open = setOf('(', '[', '{', '<')
-        val score = mapOf(')' to 1, ']' to 2, '}' to 3, '>' to 4)
         val scores = mutableListOf<Long>()
+        val openToClose = mapOf(
+            '(' to ')',
+            '[' to ']',
+            '{' to '}',
+            '<' to '>'
+        )
+        val score = mapOf(
+            ')' to 1,
+            ']' to 2,
+            '}' to 3,
+            '>' to 4
+        )
 
         input.forEach { line ->
             stack.clear()
             run line@ {
                 line.forEach { c ->
-                    if(c in open){
+                    if(c in openToClose.keys){
                         stack.push(c)
                     }else{
                         if(openToClose[stack.pop()] != c) return@line

@@ -3,6 +3,14 @@ import kotlin.math.min
 fun main() {
     class Point(val weight: Int, var work: Int?, val row: Int, val col: Int)
 
+    fun updateNeighbor(point: Point, neighbor: Point){
+        if(neighbor.work == null){
+            neighbor.work = point.work!! + neighbor.weight
+        }else{
+            neighbor.work = min(point.work!! + neighbor.weight, neighbor.work!!)
+        }
+    }
+
     fun updateSurroundingPoints(points: MutableList<MutableList<Point>>, point: Point, map: MutableMap<Int, MutableSet<Point>>){
         val row = point.row
         val col = point.col
@@ -10,27 +18,20 @@ fun main() {
 
         // For each neighboring point, if it exists
         if(row - 1 >= 0){
-            val left = points[row - 1][col]
-            left.work = if(left.work == null) point.work!! + left.weight else min(point.work!! + left.weight, left.work!!)
-            pointsToAdd.add(left)
+            pointsToAdd.add(points[row - 1][col])
         }
         if(row + 1 < points.size){
-            val right = points[row + 1][col]
-            right.work = if(right.work == null) point.work!! + right.weight else min(point.work!! + right.weight, right.work!!)
-            pointsToAdd.add(right)
+            pointsToAdd.add(points[row + 1][col])
         }
         if(col - 1 >= 0){
-            val below = points[row][col - 1]
-            below.work = if(below.work == null) point.work!! + below.weight else min(point.work!! + below.weight, below.work!!)
-            pointsToAdd.add(below)
+            pointsToAdd.add(points[row][col - 1])
         }
         if(col + 1 < points[0].size){
-            val above = points[row][col + 1]
-            above.work = if(above.work == null) point.work!! + above.weight else min(point.work!! + above.weight, above.work!!)
-            pointsToAdd.add(above)
+            pointsToAdd.add(points[row][col + 1])
         }
 
         pointsToAdd.forEach { pointToAdd ->
+            updateNeighbor(point, pointToAdd)
             if(map.containsKey(pointToAdd.work)){
                 map[pointToAdd.work]!!.add(pointToAdd)
             }else{
